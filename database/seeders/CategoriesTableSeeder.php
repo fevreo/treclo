@@ -15,7 +15,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['TO DO', 'Doing', 'Done'];
+        $categories = ['ToDo', 'Doing', 'Complete'];
 
         foreach ($categories as $category) {
             Category::create(['name' => $category]);

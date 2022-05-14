@@ -14,8 +14,8 @@ class APITest extends TestCase
     public function testUserCreation()
     {
         $response = $this->json('POST', '/api/register', [
-            'name' => 'Test User',
-            'email' => Str::random(10) . '@test.com',
+            'name' => 'YOU',
+            'email' => 'test1@test.com',
             'password' => '12345',
         ]);
 
@@ -23,6 +23,22 @@ class APITest extends TestCase
             'success' => ['token', 'name']
         ]);
     }
+
+    /**
+     * This unit test login in as a user.
+     */
+    public function testUserLogin()
+    {
+        $response = $this->json('POST', '/api/login', [
+            'email' => 'test1@test.com',
+            'password' => '12345'
+        ]);
+
+        $response->assertStatus(200)->assertJsonStructure([
+            'success' => ['token']
+        ]);
+    }
+
 
     /**
      * This unit test fetch a category.
