@@ -3,28 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         return response()->json(Category::all()->toArray());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -46,30 +37,27 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param  \App\Model\Category  $category
+     * @return array
      */
     public function show(Category $category)
     {
-        //
+        return new CategoryResource($category);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
+    // public function tasks(Category $category)
+    // {
+    //     $tasks = new CategoryResource($category->tasks()->orderBy('order')->get());
+    //     foreach($tasks as $task) {
+    //         return $task;
+    //     }
+    // }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -85,7 +73,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)

@@ -33299,7 +33299,7 @@ var staticRenderFns = [
     return _c("footer", { staticClass: "mt-5 py-5 bg-secondary rounded-top" }, [
       _c("div", { staticClass: "text-center text-white" }, [
         _vm._v(
-          "\n            Copyright © 2022 by YOU. All rights reserved.\n        "
+          "\n            Copyright © 2022 by Y.K. All rights reserved.\n        "
         ),
       ]),
     ])

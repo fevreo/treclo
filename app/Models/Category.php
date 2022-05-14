@@ -13,6 +13,11 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
+    /**
+     * Get a listing of the resource.
+     *
+     * @return array
+     */
     public function tasks()
     {
         return $this->hasMany(Task::class);

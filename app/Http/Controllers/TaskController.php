@@ -4,78 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return response()->json(Task::all()->toArray());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TaskResource::collection(Task::all());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Task  $task
+     * @return array
      */
-    public function store(Request $request)
+    public function store(Request $request, Task $task)
     {
-        $task = Task::create([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
-            'user_id' => $request->user_id,
-            'order' => $request->order
-        ]);
-
-        return response()->json([
-            'status' => (bool) $task,
-            'data'   => $task,
-            'message' => $task ? 'Task Created!' : 'Error Creating Task'
-        ]);
+        return $task->store($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param  \App\Task  $task
+     * @return array
      */
     public function show(Task $task)
     {
-        return response()->json($task);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
+        return new TaskResource($task);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Task $task)
@@ -93,7 +63,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Task  $task
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
