@@ -55,4 +55,36 @@ class Task extends Model
             'message' => $task ? 'Task Created!' : 'Error Creating Task'
         ]);
     }
+
+    /**
+     * Update the specified patch in storage
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function sort(Request $request)
+    {
+        $sort_num = 0;
+        $cat_id = 1;
+        $count = 2;
+        for ($i = 0; $i <= $count; $i++) {
+            $orders = $request->tasks[$i]['tasks'];
+            foreach ($orders as $order) {
+                $status = Task::where('id', $order['id'])->first();
+                $status->order = $sort_num;
+                $status->category_id = $cat_id;
+                $status->update();
+                $sort_num++;
+                if (count($orders) == $sort_num) {
+                    $sort_num = 0;
+                }
+            }
+            $cat_id++;
+        }
+
+        return response()->json([
+            'status' => (bool) $status,
+            'message' => $status ? 'Task Updated!' : 'Error Updating Task'
+        ]);
+    }
 }

@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response()->json(Category::all()->toArray());
+        return CategoryResource::collection(Category::all());
     }
 
     /**
@@ -38,20 +38,26 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Model\Category  $category
-     * @return array
+     * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
         return new CategoryResource($category);
     }
 
-    // public function tasks(Category $category)
-    // {
-    //     $tasks = new CategoryResource($category->tasks()->orderBy('order')->get());
-    //     foreach($tasks as $task) {
-    //         return $task;
-    //     }
-    // }
+    /**
+     * Get a listing of the resource.
+     *
+     * @param  \App\Model\Category  $category
+     * @return array
+     */
+    public function tasks(Category $category)
+    {
+        $tasks = new CategoryResource($category->tasks()->orderBy('order')->get());
+        foreach ($tasks as $task) {
+            return $task;
+        }
+    }
 
     /**
      * Update the specified resource in storage.

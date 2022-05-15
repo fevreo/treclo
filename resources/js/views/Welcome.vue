@@ -2,11 +2,11 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="m-b-md">
-                <h2 class="title m-b-md">
+                <h2 class="title m-b-md text-white">
                     TreClo
                 </h2>
-                <h3>
-                    Your efficent task planner
+                <h3 class="text-white">
+                    Thank you for visiting.<br>TreCro is a 'Kanban-style' task management tool.
                 </h3>
             </div>
         </div>

@@ -61,6 +61,18 @@ class TaskController extends Controller
     }
 
     /**
+     * Updates the order of tasks in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  \App\Task  $task
+     * @return array
+     */
+    public function sort(Request $request, Task $task)
+    {
+        return $task->sort($request);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Task  $task

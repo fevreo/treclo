@@ -50,16 +50,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get a listing of the resource.
-     *
-     * @return array
-     */
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
-    }
-
-    /**
      * Login a specified created user.
      *
      * @param  \Illuminate\Http\Request  $request
