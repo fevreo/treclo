@@ -5440,12 +5440,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -33363,8 +33357,6 @@ var render = function () {
                 [_vm._v("TreClo")]
               ),
               _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
               _c("div", { attrs: { id: "navbarSupporttedContent" } }, [
                 _c(
                   "ul",
@@ -33437,30 +33429,10 @@ var render = function () {
     _vm._v(" "),
     _c("main", { staticClass: "py-5" }, [_c("router-view")], 1),
     _vm._v(" "),
-    _vm._m(1),
+    _vm._m(0),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarSupportedContent",
-          "aria-controls": "navbarSupportedContent",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation",
-        },
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
