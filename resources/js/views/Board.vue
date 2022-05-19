@@ -23,6 +23,10 @@
                                                 " @blur="endEditing(task)" v-model="task.name"></textarea>
                                                 <label for="checkbox" v-if="task !== editingTask"
                                                     @dblclick="editTask(task)">{{ task.name }}</label>
+                                                <button type="button" class="btn btn-outline-danger btn-sm"
+                                                    @click="deleteTask(task)">
+                                                    del
+                                                </button>
                                             </div>
                                         </div>
                                     </transition-group>
@@ -118,6 +122,12 @@ export default {
         editTask(task) {
             this.editingTask = task;
         },
+        deleteTask(task) {
+            axios.delete(`api/task/${task.id}`).then((response) => {
+                console.log(response.data);
+            });
+            this.loadTasks();
+        }
     },
     mounted() {
         let token = localStorage.getItem("jwt");
