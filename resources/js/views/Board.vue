@@ -29,6 +29,7 @@
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="dummy" :key="element.id">DummyData</div>
                                     </transition-group>
                                 </draggable>
                                 <div class="small-card bg-light xt-15">
@@ -58,6 +59,11 @@
 
 .card-body-dark {
     background-color: #ccc;
+}
+
+.dummy {
+    opacity: 0;
+    margin: 0;
 }
 
 textarea {
