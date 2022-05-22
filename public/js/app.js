@@ -5440,12 +5440,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       isLoggedIn: null,
       name: null
     };
+  },
+  methods: {
+    logout: function logout() {
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("user");
+      localStorage.removeItem("user_id");
+
+      if (localStorage.getItem("jwt") != null) {
+        this.$router.go("/");
+      } else {
+        this.$router.go("/login");
+      }
+    }
   },
   mounted: function mounted() {
     this.isLoggedIn = localStorage.getItem("jwt");
@@ -33409,16 +33427,6 @@ var render = function () {
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.isLoggedIn
-                      ? _c("li", { staticClass: "nav-link text-white" }, [
-                          _vm._v(
-                            "\n                            Hi, " +
-                              _vm._s(_vm.name) +
-                              "\n                        "
-                          ),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.isLoggedIn
                       ? _c(
                           "router-link",
                           {
@@ -33431,6 +33439,34 @@ var render = function () {
                             ),
                           ]
                         )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isLoggedIn
+                      ? _c("li", { staticClass: "nav-link text-white" }, [
+                          _vm._v(
+                            "\n                            Hi, " +
+                              _vm._s(_vm.name) +
+                              "\n                        "
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isLoggedIn
+                      ? _c("li", { staticClass: "nav-link" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-danger btn-sm",
+                              attrs: { type: "button" },
+                              on: { click: _vm.logout },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Logout\n                            "
+                              ),
+                            ]
+                          ),
+                        ])
                       : _vm._e(),
                   ],
                   1

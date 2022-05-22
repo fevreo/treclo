@@ -13,12 +13,17 @@
                             <router-link :to="{ name: 'register' }" class="nav-link text-white" v-if="!isLoggedIn">
                                 Register
                             </router-link>
-                            <li class="nav-link text-white" v-if="isLoggedIn">
-                                Hi, {{ name }}
-                            </li>
                             <router-link :to="{ name: 'board' }" class="nav-link text-white" v-if="isLoggedIn">
                                 Tasks
                             </router-link>
+                            <li class="nav-link text-white" v-if="isLoggedIn">
+                                Hi, {{ name }}
+                            </li>
+                            <li class="nav-link" v-if="isLoggedIn">
+                                <button type="button" class="btn btn-outline-danger btn-sm" @click="logout">
+                                    Logout
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -42,6 +47,19 @@ export default {
             isLoggedIn: null,
             name: null,
         };
+    },
+    methods: {
+        logout() {
+            localStorage.removeItem("jwt");
+            localStorage.removeItem("user");
+            localStorage.removeItem("user_id");
+
+            if (localStorage.getItem("jwt") != null) {
+                this.$router.go("/");
+            } else {
+                this.$router.go("/login");
+            }
+        },
     },
     mounted() {
         this.isLoggedIn = localStorage.getItem("jwt");
