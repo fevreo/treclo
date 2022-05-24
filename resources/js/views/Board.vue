@@ -101,7 +101,6 @@ export default {
                 .post("api/task", { user_id, name, order, category_id })
                 .then((response) => {
                     this.categories[id].tasks.push(response.data.data);
-                    console.log(response.data);
                 });
         },
         loadTasks() {
@@ -115,23 +114,17 @@ export default {
         },
         changeOrder(data) {
             axios
-                .patch("api/task", { tasks: this.categories })
-                .then((response) => {
-                    console.log(response.data);
-                });
+                .patch("api/task", { tasks: this.categories });
         },
         endEditing(task) {
             this.editingTask = null;
-
             axios.patch(`api/task/${task.id}`, { name: task.name });
         },
         editTask(task) {
             this.editingTask = task;
         },
         deleteTask(task) {
-            axios.delete(`api/task/${task.id}`).then((response) => {
-                console.log(response.data);
-            });
+            axios.delete(`api/task/${task.id}`);
             this.loadTasks();
         }
     },
@@ -150,13 +143,14 @@ export default {
                     tasks: [],
                 });
             });
+
             this.loadTasks();
         });
     },
     computed: {
         dragOptions() {
             return {
-                animation: 1,
+                animation: 0.1,
                 group: "description",
                 ghostClass: "ghost",
             };
