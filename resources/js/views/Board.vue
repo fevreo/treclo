@@ -10,7 +10,7 @@
                             </div>
                             <div class="card-body card-body-dark">
                                 <draggable :options="dragOptions" element="div" @end="changeOrder"
-                                    v-model="element.tasks">
+                                    :v-model="element.tasks">
                                     <transition-group :id="element.id">
                                         <div v-for="task in element.tasks" :key="
                                             task.category_id +
@@ -92,7 +92,7 @@ export default {
     },
     methods: {
         addNew(id) {
-            let user_id = 1;
+            let user_id = this.user;
             let name = "Task";
             let category_id = this.categories[id].id;
             let order = this.categories[id].tasks.length;

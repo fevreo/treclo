@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -53,9 +54,11 @@ class CategoryController extends Controller
      */
     public function tasks(Category $category)
     {
+        $authUser = Auth::id();
         $tasks = new CategoryResource($category->tasks()->orderBy('order')->get());
         foreach ($tasks as $task) {
-            return $task;
+            $userTask = $task->where('user_id', $authUser);
+            return $userTask;
         }
     }
 
