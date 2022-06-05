@@ -10,7 +10,7 @@
                             </div>
                             <div class="card-body card-body-dark">
                                 <draggable :options="dragOptions" element="div" @end="changeOrder"
-                                    :v-model="element.tasks">
+                                    v-model="element.tasks">
                                     <transition-group :id="element.id">
                                         <div v-for="task in element.tasks" :key="
                                             task.category_id +
@@ -150,7 +150,7 @@ export default {
     computed: {
         dragOptions() {
             return {
-                animation: 0.1,
+                animation: 1000,
                 group: "description",
                 ghostClass: "ghost",
             };
