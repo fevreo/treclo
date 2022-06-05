@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
+use Symfony\Component\HttpFoundation\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/category/{category}/tasks', [CategoryController::class, 'tasks']);
     Route::patch('/task', [TaskController::class, 'sort']);
+    Route::post('logout', [UserController::class, 'logout']);
     Route::apiResources([
         '/category' => CategoryController::class,
         '/task' => TaskController::class

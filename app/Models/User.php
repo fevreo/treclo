@@ -65,7 +65,7 @@ class User extends Authenticatable
         if (Auth::attempt($credentials)) {
             $id = Auth::id();
             $user = User::find($id);
-            $success['token'] = $user->createToken('MyApp')->accessToken;
+            $success['token'] = $user->createToken('TreClo')->accessToken;
             $success['name'] = $user->name;
             $success['id'] = $user->id;
 
@@ -97,11 +97,21 @@ class User extends Authenticatable
         $input['password'] = bcrypt($input['password']);
 
         $user = User::create($input);
-        $success['token'] = $user->createToken('MyApp')->accessToken;
+        $success['token'] = $user->createToken('TreClo')->accessToken;
         $success['name'] = $user->name;
         $success['id'] = $user->id;
 
         return response()->json(['success' => $success]);
+    }
+
+    /**
+     * Get a Access Token.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function accessToken()
+    {
+        return $this->hasMany('\App\Models\OauthAccessToken');
     }
 
     /**
