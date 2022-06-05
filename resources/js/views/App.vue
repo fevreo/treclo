@@ -50,6 +50,13 @@ export default {
     },
     methods: {
         logout() {
+            axios
+                .post("api/logout", {
+                    id: localStorage.getItem("user_id")
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
             localStorage.removeItem("jwt");
             localStorage.removeItem("user");
             localStorage.removeItem("user_id");
