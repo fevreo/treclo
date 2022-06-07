@@ -7,7 +7,7 @@
 
                     <div class="card-body">
                         <form method="POST" action="/login">
-                            <div class="form-group row">
+                            <div class="form-group row mb-3">
                                 <label for="email" class="col-sm-4 col-form-label text-md-right">E-mail Address</label>
 
                                 <div class="col-md-6">
@@ -16,7 +16,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-3">
                                 <label for="password" class="col-sm-4 col-form-label text-md-right">Password</label>
 
                                 <div class="col-md-6">
