@@ -15,7 +15,7 @@ class APITest extends TestCase
     {
         $response = $this->json('POST', '/api/register', [
             'name' => 'YOU',
-            'email' => 'test1@test.com',
+            'email' => 'test@test.com',
             'password' => '12345',
         ]);
 
@@ -30,12 +30,25 @@ class APITest extends TestCase
     public function testUserLogin()
     {
         $response = $this->json('POST', '/api/login', [
-            'email' => 'test1@test.com',
+            'email' => 'test@test.com',
             'password' => '12345'
         ]);
 
         $response->assertStatus(200)->assertJsonStructure([
             'success' => ['token']
+        ]);
+    }
+
+    /**
+     * This unit test delete a user.
+     */
+    public function testUserDeletion()
+    {
+        $user = \App\Models\User::where(['email' => 'test@test.com'])->first();
+        $user->delete();
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'test@test.com',
         ]);
     }
 
@@ -47,15 +60,12 @@ class APITest extends TestCase
     {
         $user = \App\Models\User::find(1);
 
-        $response = $this->actingAs($user, 'api')
+        $this->actingAs($user, 'api')
             ->json('GET', '/api/category')
             ->assertStatus(200)->assertJsonStructure([
                 '*' => [
                     'id',
                     'name',
-                    'created_at',
-                    'updated_at',
-                    'deleted_at'
                 ]
             ]);
     }
@@ -68,7 +78,7 @@ class APITest extends TestCase
         $this->withoutMiddleware();
 
         $response = $this->json('POST', '/api/category', [
-            'name' => Str::random(10),
+            'name' => 'Test Category',
         ]);
 
         $response->assertStatus(200)->assertJson([
@@ -83,10 +93,9 @@ class APITest extends TestCase
     public function testCategoryDeletion()
     {
         $user = \App\Models\User::find(1);
+        $category = \App\Models\Category::where(['name' => 'Test Category'])->first();
 
-        $category = \App\Models\Category::create(['name' => 'To be deleted']);
-
-        $response = $this->actingAs($user, 'api')
+        $this->actingAs($user, 'api')
             ->json('DELETE', "/api/category/{$category->id}")
             ->assertStatus(200)->assertJson([
                 'status' => true,
